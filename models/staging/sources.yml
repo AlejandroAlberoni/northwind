@@ -1,0 +1,22 @@
+version: 2
+
+sources:
+  - name: airbyte_data
+    description: Usage of famous Northwind dataset in dbt transformation
+    tables:
+      - name: Product
+        description: Products sold by the Northwind company
+      - name: Customer
+        description: Customers of the Northwind company
+      - name: Employee
+        description: Employees of the Northwind company
+      - name: Order
+        description: Orders made by customers of the Northwind company
+      - name: Supplier
+        description: Suppliers of the Northwind company
+      - name: Category
+        description: Categories of products sold by the Northwind company
+      - name: Shipper
+        description: Shippers used by the Northwind company
+      - name: OrderDetail
+        description: Details of orders made by customers of the Northwind company
