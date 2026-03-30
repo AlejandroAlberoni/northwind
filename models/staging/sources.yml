@@ -20,3 +20,7 @@ sources:
         description: Shippers used by the Northwind company
       - name: OrderDetail
         description: Details of orders made by customers of the Northwind company
+      - name: Territory
+        description: Territories to which the Northwind company ships orders
+      - name: EmployeeTerritory
+        description: Territories assigned to employees of the Northwind company
