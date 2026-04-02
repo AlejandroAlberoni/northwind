@@ -1,0 +1,1 @@
+-- Denormalize Order and OrderDetails
