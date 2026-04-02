@@ -1,14 +1,39 @@
 with 
-    dim_product as (
-    select
+    product as (
+        select
             *
-    from {{ ref('stg_product') }}
+        from {{ ref('stg_product') }}
     ),
-    transformed as (
-    select
-        row_number() over (order by dim_product.Id) as product_sk
-        ,*
-    from dim_product
+    supplier as (
+        select
+            *
+        from {{ ref('stg_supplier') }}
+
+    ),
+    category as (
+        select
+            *
+        from {{ ref('stg_category') }}
+    ),
+    final as (
+        select
+            {{ dbt_utils.generate_surrogate_key(['p.Id']) }} as product_sk,
+            -- Business Keys
+            p.Id,
+            s.Id as SupplierId,
+            c.Id as CategoryId,
+
+            p.ProductName,
+
+            s.CompanyName as Supplier,
+            s.Phone as SupplierPhone,
+
+            c.CategoryName as Category
+
+        from product p
+        left join supplier s
+            on p.SupplierId = s.Id
+        left join category c
+            on p.CategoryId = c.Id
     )
-    -- MISSING: COLLAPSE SUPPLY AND CATEGORY TABLES
-select * from transformed
+select * from final
