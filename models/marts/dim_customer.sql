@@ -1,13 +1,13 @@
 with 
-    dim_customer as (
+    source as (
     select
             *
     from {{ ref('stg_customer') }}
     ),
     transformed as (
     select
-        row_number() over (order by dim_customer.Id) as customer_sk
-        ,*
-    from dim_customer
+        {{ dbt_utils.generate_surrogate_key(['s.Id']) }} as customer_sk,
+        s.*
+    from source s
     )
 select * from transformed

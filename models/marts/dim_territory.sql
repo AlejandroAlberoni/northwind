@@ -1,13 +1,13 @@
 with 
-    dim_territory as (
+    source as (
     select
             *
     from {{ ref('stg_territory') }}
     ),
     transformed as (
     select
-        row_number() over (order by dim_territory.Id) as territory_sk
-        ,*
-    from dim_territory
+        {{ dbt_utils.generate_surrogate_key(['s.Id']) }} as territory_sk,
+        s.*
+    from source s
     )
 select * from transformed
