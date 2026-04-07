@@ -1,0 +1,55 @@
+version: 2
+
+models:
+  - name: bridge_employee_territory
+    description: Bridge table between employee and territory dimensions
+    columns:
+      - name: employee_sk
+        description: Surrogate key for the employee dimension
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_employee')
+              field: employee_sk
+      - name: territory_sk
+        description: Surrogate key for the territory dimension
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_territory')
+              field: territory_sk
+
+  - name: fact_vendas
+    description: Fact table for sales orders
+    columns:
+      - name: customer_fk
+        description: Foreign key to dim_customer
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_customer')
+              field: customer_sk
+
+      - name: employee_fk
+        description: Foreign key to dim_employee
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_employee')
+              field: employee_sk
+
+      - name: shipper_fk
+        description: Foreign key to dim_shipper
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_shipper')
+              field: shipper_sk
+
+      - name: product_fk
+        description: Foreign key to dim_product
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_product')
+              field: product_sk
