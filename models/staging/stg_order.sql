@@ -7,7 +7,7 @@ with
             , EmployeeId	
             , ShipVia as ShipperId	
 
-            , OrderDate	
+            , SAFE_CAST(TRIM(OrderDate) as date) as OrderDate	
             , RequiredDate	
             , ShippedDate	
             , Freight	

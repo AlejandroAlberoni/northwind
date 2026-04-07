@@ -3,7 +3,7 @@ with spine as (
     {{ dbt_utils.date_spine(
         datepart   = "day",
         start_date = "date('2012-01-01')",
-        end_date   = "date('2015-01-01')"
+        end_date   = "date('2014-12-31')"
     ) }}
 
 ),
@@ -11,7 +11,7 @@ with spine as (
 base as (
 
     select
-        date_day as date_id,
+        date(date_day) as date_id,
 
         -- chaves úteis
         format_date('%Y%m%d', date_day) as date_key,
